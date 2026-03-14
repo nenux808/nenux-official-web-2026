@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { Send, Star } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { getSupabaseClient } from "@/lib/supabase";
 
 type FormState = {
   name: string;
@@ -40,6 +40,7 @@ export default function ReviewForm() {
     setSubmitting(true);
     setStatus({ type: "idle", message: "" });
 
+    const supabase = getSupabaseClient();
     const { error } = await supabase.from("reviews").insert([
       {
         name: form.name.trim(),

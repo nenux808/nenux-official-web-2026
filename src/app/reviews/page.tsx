@@ -1,5 +1,5 @@
 import { Star } from "lucide-react";
-import { supabase } from "@/lib/supabase";
+import { getSupabaseClient } from "@/lib/supabase";
 import ReviewCard from "@/components/ReviewCard";
 import ReviewForm from "@/components/ReviewForm";
 import SectionIntro from "@/components/SectionIntro";
@@ -15,6 +15,8 @@ type ReviewRow = {
 };
 
 export default async function ReviewsPage() {
+   const supabase = getSupabaseClient();
+    
   const { data, error } = await supabase
     .from("reviews")
     .select("id, name, role, company, rating, message, created_at")

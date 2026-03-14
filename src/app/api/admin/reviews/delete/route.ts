@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { supabaseAdmin } from "@/lib/supabase-admin";
+import { getSupabaseAdminClient } from "@/lib/supabase-admin";
 
 export async function POST(req: Request) {
   try {
@@ -27,6 +27,7 @@ export async function POST(req: Request) {
         { status: 400 }
       );
     }
+    const supabaseAdmin = getSupabaseAdminClient();
 
     const { data, error } = await supabaseAdmin
       .from("reviews")
